@@ -7,6 +7,8 @@
 ## Usage
 
 ```
+require('bloomr')
+
 api = Bloomr::Api.new(
     api_url_base: 'https://sandbox.bloom.dev',
     auth_url_base: 'https://auth.bloom.dev',
@@ -26,7 +28,7 @@ id = api.register_consumer(token, {
     'date_of_birth' => '1964-03-15',
     "ssn" => "123456789"
 })
-api.get_credit_data(token, ORDER_ID)
+api.get_credit_data(token, id)
 ```
 
 ## Development
