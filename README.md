@@ -7,6 +7,8 @@
 ## Usage
 
 ```
+require('bloomr')
+
 api = Bloomr::Api.new(
     api_url_base: 'https://sandbox.bloom.dev',
     auth_url_base: 'https://auth.bloom.dev',
