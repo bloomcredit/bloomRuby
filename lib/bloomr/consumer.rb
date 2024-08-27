@@ -55,7 +55,7 @@ module Bloomr
         ip_address: consumer_info['ip_address'],
         name: name,
         phones: phones
-      }.compact
+      }.compact.reject { |_, v| v.nil? || v.empty?  }
 
       body = {
         data: {
@@ -70,7 +70,7 @@ module Bloomr
       }
 
       response = request('/v2/core/consumers', :post, body, headers)
-      response['data']['id']
+      response[:data][:id]
     end
   end
 end
