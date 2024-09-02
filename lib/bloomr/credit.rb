@@ -42,12 +42,14 @@ module Bloomr
         'Authorization' => "Bearer #{token}"
       }
 
-      request(
+      response = request(
         "/v2/data-access/orders",
         :post,
         body,
         headers
       )
+
+      response[:data][:id]
     end
 
     def get_decision(credit_data)
@@ -81,11 +83,11 @@ module Bloomr
 
     def parse_credit_scores(credit_scores)
       credit_scores.map do |data|
-        score_reasons = data['score_reasons']
-        model = data['model']
-        value = data['value']
-        id = data['id']
-        credit_data_id = data['credit_data_id']
+        score_reasons = data[:score_reasons]
+        model = data[:model]
+        value = data[:value]
+        id = data[:id]
+        credit_data_id = data[:credit_data_id]
 
         score_reasons.map do |reason|
           {
@@ -93,8 +95,8 @@ module Bloomr
             value: value,
             id: id,
             credit_data_id: credit_data_id,
-            score_id: reason['id'],
-            reason_description: reason['reason_description']
+            score_id: reason[:id],
+            reason_description: reason[:reason_description]
           }
         end
       end
@@ -102,10 +104,10 @@ module Bloomr
 
     def parse_credit_data_order(credit_data_order)
       data = {
-        order_date: credit_data_order['order_date'],
-        order_id: credit_data_order['order_id'],
-        order_sku_id: credit_data_order['order_sku_id'],
-        consumer_id: credit_data_order['consumer_id']
+        order_date: credit_data_order[:order_date],
+        order_id: credit_data_order[:order_id],
+        order_sku_id: credit_data_order[:order_sku_id],
+        consumer_id: credit_data_order[:consumer_id]
       }
     end
 
@@ -113,15 +115,15 @@ module Bloomr
       # Parse all attributes
       attributes = report.reject { |key, _| key == "credit_data_order" }
                          .values.flatten
-                         .map { |row| row['order_id'] }
+                         .map { |row| row[:order_id] }
       # Credit_data_order
-      credit_data_order = report["credit_data_order"]
+      credit_data_order = report[:credit_data_order]
 
       credit_data = parse_credit_data_order(credit_data_order)
-      credit_scores = parse_credit_scores(credit_data_order["credit_scores"])
-      mla_statuses = credit_data_order["mla_statuses"]
-      ofac_statuses = credit_data_order["ofac_statuses"]
-      tradelines = credit_data_order["tradelines"]
+      credit_scores = parse_credit_scores(credit_data_order[:credit_scores])
+      mla_statuses = credit_data_order[:mla_statuses]
+      ofac_statuses = credit_data_order[:ofac_statuses]
+      tradelines = credit_data_order[:tradelines]
 
       return {
         attributes:,
