@@ -27,11 +27,11 @@ module Bloomr
         zipcode: consumer_info['zipcode']
       }.compact]
 
-      emails = {
+      emails = [{
         email_address: consumer_info['email_address'],
         primary: consumer_info['email_primary'],
         type: consumer_info['email_type']
-      }.compact
+      }.compact]
 
       name = {
         first_name: consumer_info['first_name'],
