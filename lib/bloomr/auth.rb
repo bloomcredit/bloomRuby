@@ -10,6 +10,7 @@ module Bloomr
         client_id: client_id,
         client_secret: client_secret,
         audience: 'dev-api',
+        scope: 'data-access:all',
         grant_type: 'client_credentials'
       }
 
@@ -17,7 +18,7 @@ module Bloomr
         'Content-Type' => 'application/x-www-form-urlencoded'
       }
 
-      auth_request('/oauth/token', :post, body, headers)[:access_token]
+      auth_request('/oauth2/token', :post, body, headers)[:access_token]
     end
   end
 end

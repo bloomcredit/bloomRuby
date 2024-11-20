@@ -11,7 +11,7 @@ require('bloomr')
 
 api = Bloomr::Api.new(
     api_url_base: 'https://sandbox.bloom.dev',
-    auth_url_base: 'https://auth.bloom.dev',
+    auth_url_base: 'https://authn.bloom.dev',
     client_id: 'CLIENT_ID',
     client_secret: 'CLIENT_SECRET'
 )

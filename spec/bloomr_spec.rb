@@ -9,7 +9,7 @@ RSpec.describe Bloomr do
     # Bloomr.debug = true
     api = Bloomr::Api.new(
       api_url_base: 'https://sandbox.bloom.dev',
-      auth_url_base: 'https://auth.bloom.dev',
+      auth_url_base: 'https://authn.bloom.dev',
       client_id: 'client_id',
       client_secret: 'client_secret_key'
     )
